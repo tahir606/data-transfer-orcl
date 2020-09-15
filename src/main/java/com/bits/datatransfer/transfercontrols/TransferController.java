@@ -16,13 +16,13 @@ public class TransferController {
         this.dummyRepository = dummyRepository;
     }
 
-    @GetMapping
-    public void receiveData() {
+    @PostMapping
+    public void insertData() {
 
     }
 
-    @PostMapping
-    public void sendData() {
+    @GetMapping
+    public void extractData() {
 
     }
 }

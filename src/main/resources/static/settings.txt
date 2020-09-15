@@ -1,1 +1,0 @@
-192.168.100.150:1521/ORCL,portal,portal

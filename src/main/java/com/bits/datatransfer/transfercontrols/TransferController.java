@@ -1,16 +1,17 @@
 package com.bits.datatransfer.transfercontrols;
 
 import com.bits.datatransfer.dummy.DummyRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/transfer")
 public class TransferController {
 
     private final DummyRepository dummyRepository;
+
+    private final static String TABLE_KEY = "tableName";
 
     public TransferController(DummyRepository dummyRepository) {
         this.dummyRepository = dummyRepository;
@@ -19,8 +20,8 @@ public class TransferController {
     // Accepts Data as JSON from External Databases
     // And Stores it in the Local Database
     @PostMapping
-    public void importData() {
-
+    public void importData(@RequestBody Map<String, Object> payload) {
+        System.out.println(payload.get(TABLE_KEY));
     }
 
     // Sends Data as JSON from Local Database

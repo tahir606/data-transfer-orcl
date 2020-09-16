@@ -1,0 +1,3 @@
+curl -v http://localhost:8081/settings -H 'Content-type:application/json' -d '{"ip":"192", "dbUser":"123", "dbPass":"132"}'
+
+curl -v http://localhost:8081/transfer -H 'Content-type:application/json' -d '{"tableName":"dummy_table", "data": [{"key":"Samwise Gamjee","value": "Taters"}]}'

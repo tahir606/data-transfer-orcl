@@ -16,13 +16,17 @@ public class TransferController {
         this.dummyRepository = dummyRepository;
     }
 
+    // Accepts Data as JSON from External Databases
+    // And Stores it in the Local Database
     @PostMapping
-    public void insertData() {
+    public void importData() {
 
     }
 
+    // Sends Data as JSON from Local Database
+    // To Specified External Databases
     @GetMapping
-    public void extractData() {
+    public void exportData() {
 
     }
 }

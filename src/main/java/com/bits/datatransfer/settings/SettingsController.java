@@ -1,8 +1,7 @@
 package com.bits.datatransfer.settings;
 
-import com.bits.datatransfer.jcode.FileHandling;
+import com.bits.datatransfer.jcode.FileHandlingImpl;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -13,9 +12,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/settings")
 public class SettingsController {
 
-    private final FileHandling fileHandling;
+    private final FileHandlingImpl fileHandling;
 
-    public SettingsController(FileHandling fileHandling) {
+    public SettingsController(FileHandlingImpl fileHandling) {
         this.fileHandling = fileHandling;
     }
 

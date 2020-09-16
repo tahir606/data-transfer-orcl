@@ -1,9 +1,10 @@
 package com.bits.datatransfer;
 
-import com.bits.datatransfer.jcode.FileHandling;
-import com.bits.datatransfer.settings.Settings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
 public class DataTransferApplication {
@@ -11,5 +12,7 @@ public class DataTransferApplication {
     public static void main(String[] args) {
         SpringApplication.run(DataTransferApplication.class, args);
     }
+
+
 
 }

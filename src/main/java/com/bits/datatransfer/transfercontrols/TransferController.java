@@ -1,6 +1,7 @@
 package com.bits.datatransfer.transfercontrols;
 
 import com.bits.datatransfer.dummy.DummyRepository;
+import com.bits.datatransfer.jcode.OracleHandlingImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -9,12 +10,12 @@ import java.util.Map;
 @RequestMapping("/transfer")
 public class TransferController {
 
-    private final DummyRepository dummyRepository;
+    private final OracleHandlingImpl oracleHandling;
 
     private final static String TABLE_KEY = "tableName";
 
-    public TransferController(DummyRepository dummyRepository) {
-        this.dummyRepository = dummyRepository;
+    public TransferController(OracleHandlingImpl oracleHandling) {
+        this.oracleHandling = oracleHandling;
     }
 
     // Accepts Data as JSON from External Databases
@@ -22,6 +23,7 @@ public class TransferController {
     @PostMapping
     public void importData(@RequestBody Map<String, Object> payload) {
         System.out.println(payload.get(TABLE_KEY));
+        oracleHandling.insertQuery();
     }
 
     // Sends Data as JSON from Local Database

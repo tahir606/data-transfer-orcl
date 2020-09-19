@@ -1,16 +1,16 @@
 package com.bits.datatransfer;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import com.bits.datatransfer.transfercontrols.ExportThread;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
 public class DataTransferApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DataTransferApplication.class, args);
+
+        new ExportThread().run();
     }
 
 

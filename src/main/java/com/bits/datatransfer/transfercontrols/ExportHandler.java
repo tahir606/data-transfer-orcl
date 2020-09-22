@@ -26,9 +26,9 @@ public class ExportHandler {
     public ExportHandler(OracleHandlingImpl oracleHandling, FileHandlingImpl fileHandling) {
         client = new OkHttpClient();
         this.oracleHandling = oracleHandling;
-        this.fileHandling = fileHandling; 
+        this.fileHandling = fileHandling;
 
-        apiLink = "http://" + fileHandling.getExportSettings().getIp().trim() + ":" + "8081";
+        apiLink = "http://" + fileHandling.getExportSettings().getIp().trim() + ":" + PORT;
     }
 
     // Sends Data as JSON from Local Database

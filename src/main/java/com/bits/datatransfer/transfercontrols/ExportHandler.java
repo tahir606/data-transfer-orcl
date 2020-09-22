@@ -1,6 +1,8 @@
 package com.bits.datatransfer.transfercontrols;
 
+import com.bits.datatransfer.jcode.FileHandlingImpl;
 import com.bits.datatransfer.jcode.OracleHandlingImpl;
+import com.bits.datatransfer.settings.ExportSettings;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -15,21 +17,31 @@ import static com.bits.datatransfer.transfercontrols.APIConstants.*;
 public class ExportHandler {
 
     private OkHttpClient client;
-    private OracleHandlingImpl oracleHandling;
 
-    public ExportHandler(OracleHandlingImpl oracleHandling) {
+    private final OracleHandlingImpl oracleHandling;
+    private final FileHandlingImpl fileHandling;
+
+    private String apiLink;
+
+    public ExportHandler(OracleHandlingImpl oracleHandling, FileHandlingImpl fileHandling) {
         client = new OkHttpClient();
         this.oracleHandling = oracleHandling;
+        this.fileHandling = fileHandling; 
+
+        apiLink = "http://" + fileHandling.getExportSettings().getIp().trim() + ":" + "8081";
     }
 
     // Sends Data as JSON from Local Database
     // To Specified API which will store it in their Local Database
     public String exportData() {
 
-        String[] tables = new String[]{"dummy_table"};
+        ExportSettings exportSettings = fileHandling.getExportSettings();
 
-        for (String table : tables) {
-            String jsonString = "{\"" + TABLE_KEY + "\":\"" + table + "\", " +
+        if (exportSettings.getTableNames().length < 1)
+            return null;
+
+        for (String table : exportSettings.getTableNames()) {
+            String jsonString = "{\"" + TABLE_KEY + "\":\"" + table.trim() + "\", " +
                     "\"" + DATA_KEY + "\":[";
 
 
@@ -54,9 +66,11 @@ public class ExportHandler {
 
             System.out.println("JSON String: " + jsonString);
 
+            System.out.println(apiLink + EXPORT);
+
             RequestBody body = RequestBody.create(jsonString, JSON);
             Request request = new Request.Builder()
-                    .url(APIConstants.EXPORT)
+                    .url(apiLink + APIConstants.EXPORT)
                     .post(body)
                     .build();
 

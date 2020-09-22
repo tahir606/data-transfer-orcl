@@ -10,7 +10,7 @@ public class DataTransferApplication {
     public static void main(String[] args) {
         SpringApplication.run(DataTransferApplication.class, args);
 
-        new ExportThread().run();
+//        new ExportThread().run();
     }
 
 

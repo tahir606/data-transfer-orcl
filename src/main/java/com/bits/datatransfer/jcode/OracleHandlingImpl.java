@@ -31,14 +31,14 @@ public class OracleHandlingImpl implements OracleHandling {
         for (String column : columns) {
             columnNames = columnNames + column + ",";
         }
-        columnNames = columnNames.substring(0, columnNames.length() - 1) + ")";
+        columnNames = columnNames.substring(0, columnNames.length() - 1) + "," + ISIMPORTED + ")";
 
         for (HashMap<String, Object> row : rows) {
             query = query + " INTO " + tableName + " " + columnNames + " VALUES (";
             for (String column : columns) {
                 query = query + "'" + row.get(column).toString() + "',";
             }
-            query = query.substring(0, query.length() - 1) + ") ";
+            query = query.substring(0, query.length() - 1) + ",1)";
         }
 
         query = query + " SELECT * FROM DUAL ";

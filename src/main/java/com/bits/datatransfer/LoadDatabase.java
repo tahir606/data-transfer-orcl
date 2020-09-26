@@ -1,6 +1,5 @@
 package com.bits.datatransfer;
 
-import com.bits.datatransfer.transfercontrols.ExportThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,11 +12,10 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(ExportThread exportThread) {
+    CommandLineRunner initDatabase() {
 
         return args -> {
 //            log.info("Preloading " + exportHandler.exportData());
-            exportThread.run();
         };
     }
 

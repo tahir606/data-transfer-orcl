@@ -15,7 +15,6 @@ public class FileHandlingImpl implements FileHandling {
     private static final String TABLES_TXT = PATH + "tables.txt";
 
     public FileHandlingImpl() {
-
     }
 
     @Override
@@ -89,6 +88,7 @@ public class FileHandlingImpl implements FileHandling {
             String tableNamesString = readFromInputStream(input);
 
             exportSettings.setTableNames(tableNamesString.split(","));
+            exportSettings.setTableNamesByComma(tableNamesString);
 
             return exportSettings;
 

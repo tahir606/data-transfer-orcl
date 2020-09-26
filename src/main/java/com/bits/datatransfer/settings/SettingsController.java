@@ -29,9 +29,9 @@ public class SettingsController {
     }
 
     @GetMapping
-    EntityModel<ImportSettings> getSettings() {
+    EntityModel<ImportSettings> getImportSettings() {
         return EntityModel.of(fileHandling.getImportSettings(),
-                linkTo(methodOn(SettingsController.class).getSettings()).withSelfRel());
+                linkTo(methodOn(SettingsController.class).getImportSettings()).withSelfRel());
     }
 
 
@@ -47,5 +47,11 @@ public class SettingsController {
         fileHandling.saveExportSettings(new ExportSettings(apiLink, tableNames));
 
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/export")
+    EntityModel<ExportSettings> getExportSettings() {
+        return EntityModel.of(fileHandling.getExportSettings(),
+                linkTo(methodOn(SettingsController.class).getExportSettings()).withSelfRel());
     }
 }

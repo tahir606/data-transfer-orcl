@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -81,11 +80,11 @@ public class ExportHandler {
 
             log.info("JSON String: " + jsonString);
 
-            log.info(apiLink + EXPORT);
+            log.info(apiLink + IMPORT);
 
             RequestBody body = RequestBody.create(jsonString, JSON);
             Request request = new Request.Builder()
-                    .url(apiLink + APIConstants.EXPORT)
+                    .url(apiLink + APIConstants.IMPORT)
                     .post(body)
                     .build();
 
@@ -124,6 +123,23 @@ public class ExportHandler {
     }
 
     private boolean checkAPI() {
+        Request request = new Request.Builder()
+                .url(apiLink + ISAPIREADY)
+                .build();
+
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        System.out.println(response);
+                        return true;
+                    }
+                });
 
         return false;
     }

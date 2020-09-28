@@ -27,6 +27,15 @@ public class ImportController {
         this.oracleHandling = oracleHandling;
     }
 
+    @GetMapping("/ready")
+    public boolean isAPIReady() {
+
+        if (oracleHandling.isConnectionOpen())
+            return true;
+
+        return false;
+    }
+
     // Accepts Data as JSON from External Databases
     // And Stores it in the Local Database
     @PostMapping

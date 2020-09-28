@@ -10,7 +10,8 @@ public class APIConstants {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     //ENDPOINTS
-    public static String EXPORT = "/import";
+    public static final String ISAPIREADY = "/ready";
+    public static final String IMPORT = "/import";
 
     public final static String TABLE_KEY = "tableName",
             DATA_KEY = "data",

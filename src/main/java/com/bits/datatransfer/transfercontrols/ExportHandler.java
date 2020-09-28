@@ -48,6 +48,7 @@ public class ExportHandler {
         if (!systemCheck())
             return;
 
+
         ExportSettings exportSettings = fileHandling.getExportSettings();
 
         if (exportSettings.getTableNames().length < 1)
@@ -111,7 +112,20 @@ public class ExportHandler {
     }
 
     private boolean systemCheck() {
-        return oracleHandling.isConnectionOpen();
+        if (!oracleHandling.isConnectionOpen()) {
+            log.error("Database Connection is Closed");
+            return false;
+        }
+        if (!checkAPI()) {
+            log.error("API is unavailable.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkAPI() {
+
+        return false;
     }
 
 }

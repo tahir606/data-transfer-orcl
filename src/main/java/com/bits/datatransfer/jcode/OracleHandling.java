@@ -7,7 +7,11 @@ import java.util.Set;
 
 public interface OracleHandling {
 
-    void insertDynamicQuery(String tableName, Set<String> columns, List<HashMap<String, Object>> data);
+    boolean isConnectionOpen();
+
+    int importData(String tableName, Set<String> columns, List<HashMap<String, Object>> rows);
+
+    boolean insertDynamicQuery(String tableName, String columnNames, Set<String> columns, HashMap<String, Object> row);
 
     // Check if Table Exists
     boolean verifyTableName(String tableName);

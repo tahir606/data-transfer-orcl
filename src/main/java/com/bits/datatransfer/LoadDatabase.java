@@ -1,5 +1,6 @@
 package com.bits.datatransfer;
 
+import com.bits.datatransfer.jcode.OracleHandlingImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +16,6 @@ public class LoadDatabase {
     CommandLineRunner initDatabase() {
 
         return args -> {
-//            log.info("Preloading " + exportHandler.exportData());
         };
     }
 

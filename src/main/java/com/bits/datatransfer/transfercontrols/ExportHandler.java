@@ -42,13 +42,16 @@ public class ExportHandler {
     // Sends Data as JSON from Local Database
     // To Specified API which will store it in their Local Database
     @Scheduled(fixedRate = 5000)
-    public String exportData() {
+    public void exportData() {
 
-        log.info("Exporting now {}", dateFormat.format(new Date()));
+        //If Database is not available, return
+        if (!systemCheck())
+            return;
+
         ExportSettings exportSettings = fileHandling.getExportSettings();
 
         if (exportSettings.getTableNames().length < 1)
-            return null;
+            return;
 
         apiLink = "http://" + fileHandling.getExportSettings().getIp().trim();
 
@@ -56,19 +59,18 @@ public class ExportHandler {
             String jsonString = "{\"" + TABLE_KEY + "\":\"" + table.trim() + "\", " +
                     "\"" + DATA_KEY + "\":[";
 
-
             List<Map<String, Object>> rows = oracleHandling.getNotImportedTableData(table);
 
             if (rows.isEmpty())
-                return null;
+                continue;
 
             for (Map<String, Object> row : rows) {
                 jsonString = jsonString + "{";
                 for (String column : row.keySet()) {
-                    if (column.equals(ISIMPORTED))
+                    if (column.equals(ISIMPORTED))  //ISIMPORTED Column needs to be ignored in this json construction
                         continue;
-                    System.out.println(column);
-                    System.out.println(row.get(column).toString());
+                    log.info(column);
+                    log.info(row.get(column).toString());
                     jsonString = jsonString + "\"" + column + "\":\"" + row.get(column).toString() + "\",";
                 }
                 jsonString = jsonString.substring(0, jsonString.length() - 1) + "},";
@@ -76,9 +78,9 @@ public class ExportHandler {
 
             jsonString = jsonString.substring(0, jsonString.length() - 1) + "]}";
 
-            System.out.println("JSON String: " + jsonString);
+            log.info("JSON String: " + jsonString);
 
-            System.out.println(apiLink + EXPORT);
+            log.info(apiLink + EXPORT);
 
             RequestBody body = RequestBody.create(jsonString, JSON);
             Request request = new Request.Builder()
@@ -104,7 +106,12 @@ public class ExportHandler {
                     });
         }
 
-        return "Exported";
+        return;
 
     }
+
+    private boolean systemCheck() {
+        return oracleHandling.isConnectionOpen();
+    }
+
 }

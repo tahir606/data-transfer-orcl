@@ -9,7 +9,7 @@ import java.io.*;
 @Service
 public class FileHandlingImpl implements FileHandling {
 
-    private static final String PATH = "./";
+    private static final String PATH = "./config/settings/";
     private static final String SETTINGS_TXT = PATH + "settings.txt";
     private static final String EXPORT_TXT = PATH + "export.txt";
     private static final String TABLES_TXT = PATH + "tables.txt";
